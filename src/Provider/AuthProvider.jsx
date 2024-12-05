@@ -1,10 +1,14 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const authInfo = {};
-    return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+    // Theme Toggler
+    const [themeToggle, setThemeToggle] = useState(true);
+    const authInfo = { themeToggle, setThemeToggle };
+    return (
+        <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    );
 };
 
 export default AuthProvider;

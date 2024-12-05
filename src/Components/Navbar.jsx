@@ -1,9 +1,14 @@
-import React from "react";
 import { RiLoginBoxLine, RiLogoutBoxLine } from "react-icons/ri";
 import { Link, NavLink, useNavigate } from "react-router";
+import "@theme-toggles/react/css/classic.css";
+import { Classic } from "@theme-toggles/react";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
+    const { themeToggle, setThemeToggle } = useContext(AuthContext);
     const navigate = useNavigate();
+
     return (
         <div
             style={{
@@ -60,7 +65,13 @@ const Navbar = () => {
                     </nav>
                 </div>
             </div>
-            <div className=" w-1/2 lg:w-1/4 flex items-center justify-end lg:justify-center mr-2">
+            <div className=" w-1/2 lg:w-1/4 flex items-center justify-end lg:justify-center gap-4 mr-2">
+                <div>
+                    <Classic
+                        style={{fontSize: '2.5rem', color: "#eee"}}
+                        onClickCapture={() => setThemeToggle(!themeToggle)}
+                    />
+                </div>
                 <Link to={"/profile"} className="hidden lg:block">
                     <div className="dropdown dropdown-bottom dropdown-hover">
                         <div
@@ -113,7 +124,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                        className="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow dark:border"
                     >
                         <li>
                             <NavLink
@@ -137,6 +148,17 @@ const Navbar = () => {
                         </li>
                         <li>
                             <NavLink>Logout</NavLink>
+                        </li>
+                        <li>
+                            <Classic
+                                onClickCapture={() =>
+                                    setThemeToggle(!themeToggle)
+                                }
+                            >
+                                {themeToggle
+                                    ? "Enable Dark Mode"
+                                    : "Enable Light Mode"}
+                            </Classic>
                         </li>
                     </ul>
                 </div>
