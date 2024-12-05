@@ -1,8 +1,9 @@
 import React from "react";
 import { RiLoginBoxLine, RiLogoutBoxLine } from "react-icons/ri";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 
 const Navbar = () => {
+    const navigate = useNavigate();
     return (
         <div
             style={{
@@ -61,11 +62,34 @@ const Navbar = () => {
             </div>
             <div className=" w-1/2 lg:w-1/4 flex items-center justify-end lg:justify-center mr-2">
                 <Link to={"/profile"} className="hidden lg:block">
-                    <img
-                        className="h-14 rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
-                        src="https://i.ibb.co.com/Tc6nj4X/asset11.jpg"
-                        alt=""
-                    />
+                    <div className="dropdown dropdown-bottom dropdown-hover">
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            className="btn btn-circle btn-lg bg-transparent border-none hover:bg-green-800"
+                        >
+                            <img
+                                className="h-14 rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
+                                src="https://i.ibb.co.com/Tc6nj4X/asset11.jpg"
+                            />
+                        </div>
+                        <ul
+                            tabIndex={0}
+                            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                        >
+                            <p className="mx-auto mb-2 font-semibold text-xl">
+                                User Name
+                            </p>
+                            <li>
+                                <div
+                                    onClick={() => navigate("/profile")}
+                                    className="w-full block text-center text-lg"
+                                >
+                                    Profile
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </Link>
                 <Link className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]">
                     <RiLoginBoxLine color="#fff" fontSize={"2rem"} />
