@@ -1,9 +1,124 @@
-import React from 'react'
+import React from "react";
+import { RiLoginBoxLine, RiLogoutBoxLine } from "react-icons/ri";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
-  return (
-    <div>Navbar</div>
-  )
-}
+    return (
+        <div
+            style={{
+                backgroundImage: "url('https://i.ibb.co.com/KhbGxtm/bg2.jpg')",
+            }}
+            className="flex items-center bg-cover bg-center w-full"
+        >
+            <div
+                style={{
+                    backgroundImage:
+                        "url('https://i.ibb.co.com/R9T1YNQ/bg1.jpg')",
+                }}
+                className="w-1/2 lg:w-1/4 lg:flex hidden -ml-4 bg-cover bg-center h-[100px] skew-x-12"
+            >
+                <Link
+                    to={"/"}
+                    className="flex -skew-x-12 justify-end w-full mr-5 items-center gap-2"
+                >
+                    <img
+                        className="xl:h-[80px] lg:h-[65px]"
+                        src="https://i.ibb.co.com/Gn3kvJw/favicon.png"
+                        alt="Chill Gamer Logo"
+                    />
+                    <h1 className="text-4xl lg:text-xl xl:text-2xl text-sky-100 font-semibold drop-shadow-[0_0_5px_#00ff00]">
+                        Chill Gamer
+                    </h1>
+                </Link>
+            </div>
+            <div className="lg:w-2/4 w-2/3 -ml-4 lg:-ml-1 bg-green-600 h-[100px] skew-x-12 flex items-center">
+                <Link
+                    to={"/"}
+                    className="flex -skew-x-12 justify-start w-full lg:hidden mr-5 items-center ml-5 gap-2"
+                >
+                    <img
+                        className="md:h-[70px] h-[60px]"
+                        src="https://i.ibb.co.com/Gn3kvJw/favicon.png"
+                        alt="Chill Gamer Logo"
+                    />
+                    <h1 className="text-gl md:text-xl text-sky-100 font-semibold drop-shadow-[0_0_5px_#00ff00]">
+                        Chill Gamer
+                    </h1>
+                </Link>
+                <div className="hidden lg:flex items-center w-full text-white font-semibold -skew-x-12">
+                    <nav className="flex items-center gap-3 justify-evenly w-full">
+                        <NavLink to={"/"}>Home</NavLink>
 
-export default Navbar
+                        <NavLink to={"/all-reviews"}>All Reviews</NavLink>
+
+                        <NavLink to={"/add-reviews"}>Add Review</NavLink>
+
+                        <NavLink to={"/my-reviews"}>My Reviews</NavLink>
+
+                        <NavLink to={"/my-watchlist"}>My Watchlist</NavLink>
+                    </nav>
+                </div>
+            </div>
+            <div className=" w-1/2 lg:w-1/4 flex items-center justify-end lg:justify-center mr-2">
+                <Link to={"/profile"} className="hidden lg:block">
+                    <img
+                        className="h-14 rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
+                        src="https://i.ibb.co.com/Tc6nj4X/asset11.jpg"
+                        alt=""
+                    />
+                </Link>
+                <Link className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]">
+                    <RiLoginBoxLine color="#fff" fontSize={"2rem"} />
+                </Link>
+                <Link className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]">
+                    <RiLogoutBoxLine color="fff" fontSize={"2rem"} />
+                </Link>
+                <div className="dropdown dropdown-end lg:hidden">
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        className="btn btn-ghost btn-circle avatar"
+                    >
+                        <div className="rounded-full">
+                            <img
+                                className="h-14 rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
+                                src="https://i.ibb.co.com/Tc6nj4X/asset11.jpg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                    >
+                        <li>
+                            <NavLink
+                                to={"/profile"}
+                                className="justify-between"
+                            >
+                                Profile
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/"}>Home</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/my-watchlist"}>My Watchlist</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/my-reviews"}>My Reviews</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/all-reviews"}>All Reviews</NavLink>
+                        </li>
+                        <li>
+                            <NavLink>Logout</NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Navbar;

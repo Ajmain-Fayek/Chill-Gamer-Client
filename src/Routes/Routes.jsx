@@ -3,11 +3,12 @@ import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home";
 import PrivateRouter from "../Provider/PrivateRouter";
 import AddReviews from "../Pages/AddReviews";
-import GameWatchList from "../Pages/GameWatchList";
 import MyReviews from "../Pages/MyReviews";
 import AllReviews from "../Pages/AllReviews";
 import { Login } from "../Components/Login";
 import Register from "../Components/Register";
+import MyWatchlist from "../Pages/MyWatchlist";
+import Profile from "../Pages/Profile";
 
 const routes = createBrowserRouter([
     {
@@ -39,10 +40,10 @@ const routes = createBrowserRouter([
                 ),
             },
             {
-                path: "/GameWatchList",
+                path: "/my-watchlist",
                 element: (
                     <PrivateRouter>
-                        <GameWatchList />
+                        <MyWatchlist />
                     </PrivateRouter>
                 ),
             },
@@ -51,6 +52,14 @@ const routes = createBrowserRouter([
                 element: (
                     <PrivateRouter>
                         <MyReviews />
+                    </PrivateRouter>
+                ),
+            },
+            {
+                path: "/profile",
+                element: (
+                    <PrivateRouter>
+                        <Profile />
                     </PrivateRouter>
                 ),
             },
