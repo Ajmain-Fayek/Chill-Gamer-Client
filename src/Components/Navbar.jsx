@@ -7,15 +7,15 @@ import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import "animate.css";
 
 const Navbar = () => {
-    const { themeToggle, setThemeToggle } = useContext(AuthContext);
+    const { themeToggle, setThemeToggle, user, logOutUser } =
+        useContext(AuthContext);
     const navigate = useNavigate();
-
     return (
         <div
             style={{
                 backgroundImage: "url('https://i.ibb.co.com/KhbGxtm/bg2.jpg')",
             }}
-            className="flex items-center bg-cover bg-center w-full sticky top-0"
+            className="flex items-center bg-cover bg-center w-full sticky top-0 z-[9999]"
         >
             <div
                 style={{
@@ -66,7 +66,7 @@ const Navbar = () => {
                     </nav>
                 </div>
             </div>
-            <div className=" w-1/2 lg:w-1/4 flex items-center justify-end lg:justify-center gap-6 mr-2">
+            <div className=" w-1/2 lg:w-1/4 flex items-center justify-end lg:justify-center gap-10 mr-2">
                 <div className="hidden lg:block">
                     {themeToggle ? (
                         <button
@@ -89,11 +89,15 @@ const Navbar = () => {
                         <div
                             tabIndex={0}
                             role="button"
-                            className="btn btn-circle btn-lg bg-transparent border-none hover:bg-green-800"
+                            className="btn btn-circle w-14 btn-lg bg-transparent border-none hover:bg-green-800"
                         >
                             <img
-                                className="h-14 rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
-                                src="https://i.ibb.co.com/NjcKdp9/asset5.jpg"
+                                className="h-14 w-14 object-cover object-center rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
+                                src={
+                                    user && user.photoUrl
+                                        ? user.photoUrl
+                                        : "https://i.ibb.co.com/NjcKdp9/asset5.jpg"
+                                }
                             />
                         </div>
                         <ul
@@ -114,23 +118,32 @@ const Navbar = () => {
                         </ul>
                     </div>
                 </Link>
-                <Link className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]">
-                    <RiLoginBoxLine color="#fff" fontSize={"2rem"} />
-                </Link>
-                <Link className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]">
-                    <RiLogoutBoxLine color="fff" fontSize={"2rem"} />
-                </Link>
+                {user ? (
+                    <button
+                        onClick={() => logOutUser()}
+                        className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]"
+                    >
+                        <RiLogoutBoxLine color="fff" fontSize={"2rem"} />
+                    </button>
+                ) : (
+                    <button onClick={() => navigate('/login')} className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]">
+                        <RiLoginBoxLine color="#fff" fontSize={"2rem"} />
+                    </button>
+                )}
                 <div className="dropdown dropdown-end lg:hidden">
                     <div
                         tabIndex={0}
                         role="button"
                         className="btn btn-ghost btn-circle avatar"
                     >
-                        <div className="rounded-full">
+                        <div className="rounded-full w-14">
                             <img
-                                className="h-14 rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
-                                src="https://i.ibb.co.com/NjcKdp9/asset5.jpg"
-                                alt=""
+                                className="h-14 w-14 object-cover object-center rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
+                                src={
+                                    user && user.photoUrl
+                                        ? user.photoUrl
+                                        : "https://i.ibb.co.com/NjcKdp9/asset5.jpg"
+                                }
                             />
                         </div>
                     </div>
@@ -159,7 +172,11 @@ const Navbar = () => {
                             <NavLink to={"/all-reviews"}>All Reviews</NavLink>
                         </li>
                         <li>
-                            <NavLink>Logout</NavLink>
+                            {user ? (
+                                <NavLink onClick={() => logOutUser()}>Logout</NavLink>
+                            ) : (
+                                <NavLink to={"/login"}>LogIn</NavLink>
+                            )}
                         </li>
                         <li className="transition-all">
                             {themeToggle ? (

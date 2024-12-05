@@ -8,7 +8,9 @@ const PrivateRouter = ({ children }) => {
     // If loading true
     if (loading) {
         return (
-            <span className="block mx-auto mt-10 loading loading-spinner text-success"></span>
+            <div className="h-[600px] bg-gray-900">
+                <span className="block mx-auto py-10 loading loading-spinner text-success"></span>
+            </div>
         );
     }
 

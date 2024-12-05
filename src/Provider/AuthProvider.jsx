@@ -55,25 +55,36 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if (!currentUser) {
-                setUser(null);
-                setLoading(false);
-            }
             if (currentUser) {
-                fetch(`http://localhost:8800/users/${currentUser.email}`)
-                    .then((res) => res.json())
-                    .then((usr) => console.log(usr))
-                    .then(setLoading(false))
+                fetch(
+                    `http://localhost:8800/users/search?email=${currentUser.email}`
+                )
+                    .then((res) => {
+                        if (!res.ok) {
+                            throw new Error(`Error: ${res.statusText}`);
+                        }
+                        return res.json();
+                    })
+                    .then((usr) => {
+                        setUser(usr);
+                        console.log(usr)
+                    })
                     .catch((err) => {
-                        console.log(err);
+                        console.error("Failed to fetch user data:", err);
                         setUser(null);
+                    })
+                    .finally(() => {
                         setLoading(false);
                     });
+            } else {
+                setUser(null);
+                setLoading(false);
             }
         });
 
         return () => unsubscribe();
-    });
+    }, []);
+
     const authInfo = {
         themeToggle,
         setThemeToggle,

@@ -6,7 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
-    const { signInWithGoogle, signInUser, setEmail } = useContext(AuthContext);
+    const { signInWithGoogle, signInUser, setEmail, setUser } = useContext(AuthContext);
     const [errorMsg, setErrorMsg] = useState("");
     const [errorMsgGoogle, setErrorMsgGoogle] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +22,9 @@ const Login = () => {
         // Clear Previous Error Message
         setErrorMsg("");
 
+        if (!email || !password)
+            return setErrorMsg("Please Enter Your Email & Password to Sign In");
+
         // Sign in User
         signInUser(email, password)
             .then(() => navigate("/"))
@@ -36,6 +39,20 @@ const Login = () => {
         // Clear Previus Error Message
         setErrorMsgGoogle("");
         signInWithGoogle()
+            .then((res) =>
+                fetch("http://localhost:8800/users", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({
+                        userName: res.user.displayName,
+                        displayName: res.user.displayName,
+                        email: res.user.email,
+                        photoUrl: res.user.photoURL,
+                    }),
+                })
+                    .then((res) => res.json())
+                    .then((data) => setErrorMsgGoogle(data.message))
+            )
             .then(() => navigate("/"))
             .catch((err) => {
                 const msg = err.message.match(/\(([^)]+)\)/);
@@ -61,7 +78,9 @@ const Login = () => {
         >
             <div className="max-w-screen-lg text-gray-100 bg-gray-950/35 rounded-xl border border-gray-600 shadow-md mx-auto p-6 sm:px-8 sm:py-10 lg:px-12 backdrop-blur-sm">
                 <Helmet>
-                    <title>Login | R Coupons</title>
+                    <title>
+                        Login | Chill Gamer : A Game Review Application
+                    </title>
                 </Helmet>
                 <div className="flex flex-col justify-between space-x-0 sm:flex-row sm:space-x-12">
                     <div className="mb-8 w-full sm:mb-0 sm:w-1/2">
@@ -123,7 +142,7 @@ const Login = () => {
                         </p>
                         {/* Error */}
                         {errorMsg && (
-                            <p className="text-red-700 mt-4 bg-red-50 border border-red-100 px-4 py-1 w-fit rounded-md">
+                            <p className="text-red-100 mt-4 bg-red-50/25 border drop-shadow-[0_0_3px_#000] border-red-100 px-4 py-1 w-fit rounded-md">
                                 {errorMsg}
                             </p>
                         )}
@@ -150,7 +169,7 @@ const Login = () => {
                         </button>
                         {/* Error */}
                         {errorMsgGoogle && (
-                            <p className="text-red-700 bg-red-50 border border-red-100 px-4 py-1 w-fit rounded-md">
+                            <p className="text-red-100 mt-4 bg-red-50/25 border drop-shadow-[0_0_3px_#000] border-red-100 px-4 py-1 w-fit rounded-md">
                                 {errorMsgGoogle}
                             </p>
                         )}
