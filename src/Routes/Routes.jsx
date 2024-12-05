@@ -5,7 +5,7 @@ import PrivateRouter from "../Provider/PrivateRouter";
 import AddReviews from "../Pages/AddReviews";
 import MyReviews from "../Pages/MyReviews";
 import AllReviews from "../Pages/AllReviews";
-import { Login } from "../Components/Login";
+import Login from "../Components/Login";
 import Register from "../Components/Register";
 import MyWatchlist from "../Pages/MyWatchlist";
 import Profile from "../Pages/Profile";

@@ -15,7 +15,7 @@ const Navbar = () => {
             style={{
                 backgroundImage: "url('https://i.ibb.co.com/KhbGxtm/bg2.jpg')",
             }}
-            className="flex items-center bg-cover bg-center w-full"
+            className="flex items-center bg-cover bg-center w-full sticky top-0"
         >
             <div
                 style={{
