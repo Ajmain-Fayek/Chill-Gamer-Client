@@ -1,9 +1,10 @@
 import { RiLoginBoxLine, RiLogoutBoxLine } from "react-icons/ri";
 import { Link, NavLink, useNavigate } from "react-router";
-import "@theme-toggles/react/css/classic.css";
-import { Classic } from "@theme-toggles/react";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
+// import { fadeIn, fadeOut } from "react-animations";
+import "animate.css";
 
 const Navbar = () => {
     const { themeToggle, setThemeToggle } = useContext(AuthContext);
@@ -65,12 +66,23 @@ const Navbar = () => {
                     </nav>
                 </div>
             </div>
-            <div className=" w-1/2 lg:w-1/4 flex items-center justify-end lg:justify-center gap-4 mr-2">
-                <div>
-                    <Classic
-                        style={{fontSize: '2.5rem', color: "#eee"}}
-                        onClickCapture={() => setThemeToggle(!themeToggle)}
-                    />
+            <div className=" w-1/2 lg:w-1/4 flex items-center justify-end lg:justify-center gap-6 mr-2">
+                <div className="hidden lg:block">
+                    {themeToggle ? (
+                        <button
+                            onClick={() => setThemeToggle(!themeToggle)}
+                            className="drop-shadow-[0_0_5px_#00aa00]"
+                        >
+                            <MdDarkMode size={"1.5rem"} color="#fff" />
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => setThemeToggle(!themeToggle)}
+                            className="drop-shadow-[0_0_5px_#00aa00]"
+                        >
+                            <MdOutlineLightMode size={"1.5rem"} color="#fff" />
+                        </button>
+                    )}
                 </div>
                 <Link to={"/profile"} className="hidden lg:block">
                     <div className="dropdown dropdown-bottom dropdown-hover">
@@ -81,12 +93,12 @@ const Navbar = () => {
                         >
                             <img
                                 className="h-14 rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
-                                src="https://i.ibb.co.com/Tc6nj4X/asset11.jpg"
+                                src="https://i.ibb.co.com/NjcKdp9/asset5.jpg"
                             />
                         </div>
                         <ul
                             tabIndex={0}
-                            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow dark:border"
                         >
                             <p className="mx-auto mb-2 font-semibold text-xl">
                                 User Name
@@ -117,7 +129,7 @@ const Navbar = () => {
                         <div className="rounded-full">
                             <img
                                 className="h-14 rounded-full border border-green-500 drop-shadow-[0_0_6px_#00aa00]"
-                                src="https://i.ibb.co.com/Tc6nj4X/asset11.jpg"
+                                src="https://i.ibb.co.com/NjcKdp9/asset5.jpg"
                                 alt=""
                             />
                         </div>
@@ -149,16 +161,25 @@ const Navbar = () => {
                         <li>
                             <NavLink>Logout</NavLink>
                         </li>
-                        <li>
-                            <Classic
-                                onClickCapture={() =>
-                                    setThemeToggle(!themeToggle)
-                                }
-                            >
-                                {themeToggle
-                                    ? "Enable Dark Mode"
-                                    : "Enable Light Mode"}
-                            </Classic>
+                        <li className="transition-all">
+                            {themeToggle ? (
+                                <button
+                                    onClick={() => setThemeToggle(!themeToggle)}
+                                >
+                                    <MdDarkMode size={"1rem"} color="#000" />
+                                    {"Enable Dark Mode"}
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => setThemeToggle(!themeToggle)}
+                                >
+                                    <MdOutlineLightMode
+                                        size={"1rem"}
+                                        color="#fff"
+                                    />
+                                    {"Enable Light Mode"}
+                                </button>
+                            )}
                         </li>
                     </ul>
                 </div>
