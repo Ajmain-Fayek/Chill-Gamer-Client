@@ -55,10 +55,21 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            fetch(`http://localhost:8800/users/${currentUser.email}`)
-                .then((res) => res.json())
-                .then((usr) => setUser(usr))
-                .then(setLoading(false));
+            if (!currentUser) {
+                setUser(null);
+                setLoading(false);
+            }
+            if (currentUser) {
+                fetch(`http://localhost:8800/users/${currentUser.email}`)
+                    .then((res) => res.json())
+                    .then((usr) => console.log(usr))
+                    .then(setLoading(false))
+                    .catch((err) => {
+                        console.log(err);
+                        setUser(null);
+                        setLoading(false);
+                    });
+            }
         });
 
         return () => unsubscribe();
