@@ -92,7 +92,7 @@ const Login = () => {
                             <div className="mb-4 flex flex-col space-y-4 relative">
                                 <input
                                     className="flex h-10 w-full bg-transparent rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
-                                    placeholder="Username"
+                                    placeholder="Email"
                                     type="email"
                                     name="email"
                                     ref={emailRef}
