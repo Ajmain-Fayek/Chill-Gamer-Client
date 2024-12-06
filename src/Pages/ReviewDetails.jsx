@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const ReviewDetails = () => {
     const { user } = useContext(AuthContext);
     const { result } = useLoaderData();
+    const navigate = useNavigate();
     const {
         backgroundImg,
         details,
@@ -19,13 +21,36 @@ const ReviewDetails = () => {
         _id,
     } = result;
     const handleWatchlist = (id) => {
+        if (!user) {
+            return navigate("/login");
+        }
         fetch(`http://localhost:8800/users/${user._id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json",
             },
             body: JSON.stringify({ watchList: id }),
-        });
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.message) {
+                    Swal.fire({
+                        title: "warning",
+                        text: data.message,
+                        icon: "warning",
+                        showConfirmButton: true,
+                    });
+                }
+                if (data.result) {
+                    Swal.fire({
+                        title: "Success",
+                        text: "Game Added successfully",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                }
+            });
     };
 
     return (
