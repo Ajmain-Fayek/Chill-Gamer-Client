@@ -74,7 +74,7 @@ const Login = () => {
             style={{
                 backgroundImage: "url('https://i.ibb.co.com/S06q7fm/bg4.jpg')",
             }}
-            className="bg-cover bg-center md:py-32 py-12 px-4"
+            className="bg-cover bg-center bg-fixed md:py-32 py-12 px-4"
         >
             <div className="max-w-screen-lg text-gray-100 bg-gray-950/35 rounded-xl border border-gray-600 shadow-md mx-auto p-6 sm:px-8 sm:py-10 lg:px-12 backdrop-blur-sm">
                 <Helmet>

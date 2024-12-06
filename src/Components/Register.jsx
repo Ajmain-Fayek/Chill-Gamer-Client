@@ -17,6 +17,7 @@ const Register = () => {
         const firstName = e.target.firstName.value;
         const LastName = e.target.lastName.value;
         const name = firstName + " " + LastName;
+        const uname = firstName + LastName;
         const email = e.target.email.value;
         const userName = e.target.userName.value;
         const password = e.target.password.value;
@@ -43,7 +44,7 @@ const Register = () => {
         const obj = {
             displayName: name,
             email,
-            userName: userName ? userName : name,
+            userName: userName ? userName : uname,
             photoURL,
         };
 
@@ -80,7 +81,7 @@ const Register = () => {
             style={{
                 backgroundImage: "url('https://i.ibb.co.com/S06q7fm/bg4.jpg')",
             }}
-            className="bg-cover bg-center md:py-32 py-12 px-4"
+            className="bg-cover bg-center bg-fixed md:py-32 py-12 px-4"
         >
             <div className="max-w-md mx-auto space-y-6 text-[#fff] bg-gray-950/35 rounded-xl border border-gray-600 shadow-md p-6 sm:px-8 sm:py-10 lg:px-12 backdrop-blur-sm">
                 <Helmet>
