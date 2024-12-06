@@ -1,10 +1,14 @@
 import React from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { Carousel } from "../Components/Carousel";
 
 const AllReviews = () => {
     const reviews = useLoaderData();
-    console.log(reviews);
+    const navigate = useNavigate();
+    // console.log(reviews);
+    const handleExplore = (id) => {
+        return navigate(`/${id}`);
+    };
     return (
         <div>
             <div className="mx-auto container p-4">
@@ -35,7 +39,10 @@ const AllReviews = () => {
                                         Genres: {r.genres}
                                     </p>
                                     <div className="card-actions justify-end">
-                                        <button className="btn btn-accent">
+                                        <button
+                                            onClick={() => handleExplore(r._id)}
+                                            className="btn btn-accent"
+                                        >
                                             Explore Details
                                         </button>
                                     </div>

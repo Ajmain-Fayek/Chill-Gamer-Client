@@ -9,6 +9,7 @@ import Login from "../Components/Login";
 import Register from "../Components/Register";
 import MyWatchlist from "../Pages/MyWatchlist";
 import Profile from "../Pages/Profile";
+import ReviewDetails from "../Pages/ReviewDetails";
 
 const routes = createBrowserRouter([
     {
@@ -31,6 +32,12 @@ const routes = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+            {
+                path: "/:id",
+                element: <ReviewDetails />,
+                loader: ({ params }) =>
+                    fetch(`http://localhost:8800/reviews/${params.id}`),
             },
             {
                 path: "/add-reviews",

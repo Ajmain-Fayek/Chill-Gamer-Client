@@ -15,8 +15,8 @@ const MyReviews = () => {
             }
         };
         fetchData();
-    }, []);
-    console.log(reviews);
+    }, [user.email]);
+    // console.log(reviews);
     return (
         <div className="flex flex-wrap flex-col sm:flex-row items-center justify-center md:gap-10 sm:gap-6 gap-10 p-6 container mx-auto">
             {reviews.length === 0 ? (
