@@ -141,12 +141,11 @@ const AddReviews = () => {
                                 </div>
                                 <select
                                     required
+                                    defaultValue={"Pick one"}
                                     name="genres"
                                     className="select select-bordered bg-transparent border-gray-200 placeholder:text-gray-200 focus:border-green-400"
                                 >
-                                    <option selected disabled>
-                                        Pick one
-                                    </option>
+                                    <option disabled>Pick one</option>
                                     <option className="bg-transparent text-black">
                                         Action
                                     </option>

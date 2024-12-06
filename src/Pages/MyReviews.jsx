@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import { FaEye, FaPen } from "react-icons/fa";
+import { Link } from "react-router";
+import { MdDelete } from "react-icons/md";
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
@@ -17,47 +21,105 @@ const MyReviews = () => {
         fetchData();
     }, [user.email]);
     // console.log(reviews);
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#EA4744",
+            cancelButtonColor: "#D2B48C",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:8800/reviews/${id}`, {
+                    method: "DELETE",
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        // console.log(data);
+                        if (data.message === "Review Deleted Successfully") {
+                            setReviews(reviews.filter((r) => r._id !== id));
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: data.message,
+                                icon: "success",
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Failed!",
+                                text: data.message,
+                                icon: "error",
+                            });
+                        }
+                    });
+            }
+        });
+    };
     return (
-        <div className="flex flex-wrap flex-col sm:flex-row items-center justify-center md:gap-10 sm:gap-6 gap-10 p-6 container mx-auto">
+        <div className="flex flex-wrap flex-col sm:flex-row items-center justify-center md:gap-10 sm:gap-6 gap-10 py-6 sm:px-6  container mx-auto">
             {reviews.length === 0 ? (
                 <p className="text-red-600 bg-red-100 border mx-auto border-red-300 px-4 py-2 w-full text-center container rounded-md">
-                    You haven't Review Any Games
+                    You haven't Watchlist Any Reviews
                 </p>
             ) : (
-                reviews.map((r) => (
-                    <div
-                        key={r._id}
-                        style={{
-                            backgroundImage: `url('${
-                                r.poster ||
-                                "https://i.ibb.co.com/VQ6VhT4/icon.jpg"
-                            }')`,
-                        }}
-                        className="card bg-cover bg-center rounded-xl hover:drop-shadow-[0_0_5px_#0a0] drop-shadow-[0_0_3px_#3eacff] hover:scale-105 h-[480px] lg:w-[300px] w-[250px]"
-                    >
-                        <div className="rounded-b-xl">
-                            <div className="card-body lg:mt-[270px] mt-[175px] backdrop-blur-sm rounded-b-xl text-white bg-black/35">
-                                <h2 className="card-title drop-shadow-[0_0_5px_#000]">
-                                    {r.title}
-                                </h2>
-                                <p className="drop-shadow-[0_0_5px_#000]">
-                                    Publishing Year: {r.publishingYear}
-                                </p>
-                                <p className="drop-shadow-[0_0_5px_#000]">
-                                    Genres: {r.genres}
-                                </p>
-                                <div className="card-actions justify-center">
-                                    <button className="btn btn-accent">
-                                        Update Review
-                                    </button>
-                                    <button className="btn btn-warning">
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))
+                <div className="overflow-x-auto container mx-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Title</th>
+                                <th>Publishing Year</th>
+                                <th>Genres</th>
+                                <th>Rating / 5.00</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        {reviews.map((r, index) => (
+                            <tbody key={r._id}>
+                                {/* row 1 */}
+                                <tr className="hover">
+                                    <th>{index + 1}</th>
+                                    <td>{r.title}</td>
+                                    <td>{r.publishingYear}</td>
+                                    <td>{r.genres}</td>
+                                    <td>{r.rating}</td>
+                                    <td>
+                                        <div className="flex gap-4 w-fit">
+                                            <Link
+                                                to={`/${r._id}`}
+                                                className="btn btn-square btn-sm rounded-md bg-[#0a0] text-white hover:bg-[#0c0]"
+                                            >
+                                                <FaEye
+                                                    style={{ fontSize: "1rem" }}
+                                                />
+                                            </Link>
+                                            <Link
+                                                to={`/update-coffee/${r._id}`}
+                                                className="btn btn-square btn-sm rounded-md bg-[#3C393B] text-gray-200 hover:bg-[#555154]"
+                                            >
+                                                <FaPen
+                                                    style={{ fontSize: "1rem" }}
+                                                />
+                                            </Link>
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(r._id)
+                                                }
+                                                className="btn btn-square btn-sm rounded-md bg-[#EA4744] text-gray-200 hover:bg-[#b33533]"
+                                            >
+                                                <MdDelete
+                                                    style={{ fontSize: "1rem" }}
+                                                />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        ))}
+                    </table>
+                </div>
             )}
         </div>
     );
