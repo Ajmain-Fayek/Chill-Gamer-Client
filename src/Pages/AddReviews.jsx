@@ -66,7 +66,7 @@ const AddReviews = () => {
                     Add Reviews | Chill Gamer : A Game Review Application
                 </title>
             </Helmet>
-            <div className="space-y-6 w-fit text-white bg-gray-950/35 rounded-xl border border-gray-600 shadow-md mx-auto p-6 sm:px-8 sm:py-10 lg:px-12 backdrop-blur-sm">
+            <div className="space-y-6 w-fit text-white bg-gray-950/50 rounded-xl border border-gray-600 shadow-md mx-auto p-6 sm:px-8 sm:py-10 lg:px-12 backdrop-blur-sm">
                 <Link
                     to="/"
                     className="drop-shadow-2xl font-rancho flex items-center gap-1 text-lg max-w-screen-md mx-auto font-semibold px-6 sm:px-0"
@@ -114,7 +114,7 @@ const AddReviews = () => {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder="2024"
+                                    placeholder="Ex: 2024"
                                     name="pubYear"
                                     className="input input-bordered w-full bg-transparent border-gray-200 placeholder:text-gray-200 focus:border-green-400"
                                 />
@@ -129,7 +129,7 @@ const AddReviews = () => {
                                 <input
                                     name="rating"
                                     type="text"
-                                    placeholder="4.6"
+                                    placeholder="Ex: 4.6"
                                     className="input input-bordered w-full bg-transparent border-gray-200 placeholder:text-gray-200 focus:border-green-400"
                                 />
                             </label>
@@ -168,7 +168,7 @@ const AddReviews = () => {
                                 <input
                                     name="poster"
                                     type="url"
-                                    placeholder="http://example.com/game-poster.jpg"
+                                    placeholder=" Ex:  http://example.com/game-poster.jpg"
                                     className="input input-bordered w-full bg-transparent border-gray-200 placeholder:text-gray-200 focus:border-green-400"
                                 />
                             </label>
@@ -181,7 +181,7 @@ const AddReviews = () => {
                                 <input
                                     name="backgroundImg"
                                     type="url"
-                                    placeholder="http://example.com/game-background.jpg"
+                                    placeholder="Ex:  http://example.com/game-background.jpg"
                                     className="input input-bordered w-full bg-transparent border-gray-200 placeholder:text-gray-200 focus:border-green-400"
                                 />
                             </label>
@@ -194,7 +194,7 @@ const AddReviews = () => {
                                 <textarea
                                     name="details"
                                     className="textarea textarea-bordered h-36 w-full bg-transparent border-gray-200 placeholder:text-gray-200 focus:border-green-400"
-                                    placeholder="This Game Has full control over AWM..."
+                                    placeholder="Ex:  This Game Has full control over AWM..."
                                 ></textarea>
                             </label>
 
