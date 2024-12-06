@@ -10,6 +10,10 @@ const Navbar = () => {
     const { themeToggle, setThemeToggle, user, logOutUser } =
         useContext(AuthContext);
     const navigate = useNavigate();
+    const handleLogOut = () => {
+        logOutUser();
+        return navigate("/");
+    };
     return (
         <div
             style={{
@@ -105,7 +109,7 @@ const Navbar = () => {
                             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow dark:border"
                         >
                             <p className="mx-auto mb-2 font-semibold text-xl">
-                                User Name
+                                {(user && user.userName) || "Guest"}
                             </p>
                             <li>
                                 <div
@@ -120,13 +124,16 @@ const Navbar = () => {
                 </Link>
                 {user ? (
                     <button
-                        onClick={() => logOutUser()}
+                        onClick={handleLogOut}
                         className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]"
                     >
                         <RiLogoutBoxLine color="fff" fontSize={"2rem"} />
                     </button>
                 ) : (
-                    <button onClick={() => navigate('/login')} className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]">
+                    <button
+                        onClick={() => navigate("/login")}
+                        className="hidden lg:block drop-shadow-[0_0_6px_#00aa00]"
+                    >
                         <RiLoginBoxLine color="#fff" fontSize={"2rem"} />
                     </button>
                 )}
@@ -172,8 +179,11 @@ const Navbar = () => {
                             <NavLink to={"/all-reviews"}>All Reviews</NavLink>
                         </li>
                         <li>
+                            <NavLink to={"/add-reviews"}>Add Reviews</NavLink>
+                        </li>
+                        <li>
                             {user ? (
-                                <NavLink onClick={() => logOutUser()}>Logout</NavLink>
+                                <div onClick={handleLogOut}>Logout</div>
                             ) : (
                                 <NavLink to={"/login"}>LogIn</NavLink>
                             )}

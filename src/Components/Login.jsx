@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router";
 import { Helmet } from "react-helmet-async";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const { signInWithGoogle, signInUser, setEmail, setUser } = useContext(AuthContext);
+    const { signInWithGoogle, signInUser, setEmail, setUser } =
+        useContext(AuthContext);
     const [errorMsg, setErrorMsg] = useState("");
     const [errorMsgGoogle, setErrorMsgGoogle] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +29,20 @@ const Login = () => {
 
         // Sign in User
         signInUser(email, password)
-            .then(() => navigate("/"))
+            .then((res) => {
+                console.log(res.user);
+                if (res.user) {
+                    navigate("/");
+                    Swal.fire({
+                        title: "Success",
+                        text: "Signed In successfully",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    form.reset();
+                }
+            })
             .catch((err) => {
                 const msg = err.message.match(/\(([^)]+)\)/);
                 if (msg) return setErrorMsg(msg[1]);
@@ -39,21 +54,33 @@ const Login = () => {
         // Clear Previus Error Message
         setErrorMsgGoogle("");
         signInWithGoogle()
-            .then((res) =>
-                fetch("http://localhost:8800/users", {
-                    method: "POST",
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify({
-                        userName: res.user.displayName,
-                        displayName: res.user.displayName,
-                        email: res.user.email,
-                        photoUrl: res.user.photoURL,
-                    }),
-                })
-                    .then((res) => res.json())
-                    .then((data) => setErrorMsgGoogle(data.message))
-            )
-            .then(() => navigate("/"))
+            .then((res) => {
+                // console.log(res);
+                if (res.user) {
+                    fetch("http://localhost:8800/users", {
+                        method: "POST",
+                        headers: { "content-type": "application/json" },
+                        body: JSON.stringify({
+                            userName: res.user.displayName,
+                            displayName: res.user.displayName,
+                            email: res.user.email,
+                            photoUrl: res.user.photoURL,
+                        }),
+                    })
+                        .then((res) => res.json())
+                        .then((data) => setErrorMsgGoogle(data.message));
+                }
+            })
+            .then(() => {
+                navigate("/");
+                Swal.fire({
+                    title: "Success",
+                    text: "Signed In successfully",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            })
             .catch((err) => {
                 const msg = err.message.match(/\(([^)]+)\)/);
                 if (msg) return setErrorMsgGoogle(msg[1]);
@@ -67,7 +94,7 @@ const Login = () => {
         if (!email) {
             setEmail(email);
         }
-        return navigate("/forget-password");
+        return navigate("/login");
     };
     return (
         <div
