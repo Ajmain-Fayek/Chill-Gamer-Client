@@ -7,7 +7,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 const MainLayout = () => {
     const { themeToggle } = useContext(AuthContext);
     return (
-        <div data-theme={themeToggle ? "light" : "dark"} className="h-[100vh]">
+        <div data-theme={themeToggle ? "light" : "dark"}>
             <Navbar/>
             <Outlet />
             <Footer />
