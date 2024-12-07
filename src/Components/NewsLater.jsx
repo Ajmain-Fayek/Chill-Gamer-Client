@@ -70,10 +70,7 @@ const NewsLater = () => {
                             </div>
                             <div className="mx-auto max-w-screen-sm text-sm text-left newsletter-form-footer text-gray-300">
                                 We care about the protection of your data.{" "}
-                                <a
-                                    href="#"
-                                    className="font-medium text-primary-600 text-primary-500 hover:underline"
-                                >
+                                <a className="font-medium text-primary-600 text-primary-500 hover:underline">
                                     Read our Privacy Policy
                                 </a>
                                 .
