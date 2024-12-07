@@ -11,11 +11,13 @@ import MyWatchlist from "../Pages/MyWatchlist";
 import Profile from "../Pages/Profile";
 import ReviewDetails from "../Pages/ReviewDetails";
 import UpdateProfile from "../Pages/UpdateProfile";
+import Page404 from "../Components/Page404";
 
 const routes = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <Page404 />,
         children: [
             {
                 path: "/",
