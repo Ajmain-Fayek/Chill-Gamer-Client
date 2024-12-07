@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Carousel } from "../Components/Carousel";
 import HightRatedGames from "../Components/HightRatedGames";
+import { Fade } from "react-awesome-reveal";
 
 const Home = () => {
     return (
@@ -12,7 +13,9 @@ const Home = () => {
             <div className="mx-auto container p-4">
                 <Carousel />
             </div>
-            <HightRatedGames />
+            <Fade duration={500}>
+                <HightRatedGames />
+            </Fade>
         </>
     );
 };

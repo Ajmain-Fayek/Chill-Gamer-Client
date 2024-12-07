@@ -1,4 +1,5 @@
 import React from "react";
+import { Fade } from "react-awesome-reveal";
 import { useLoaderData, useNavigate } from "react-router";
 import { Typewriter } from "react-simple-typewriter";
 

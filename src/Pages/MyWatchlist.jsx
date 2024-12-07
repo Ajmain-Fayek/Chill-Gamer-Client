@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router";
 import { Helmet } from "react-helmet-async";
+import { Fade } from "react-awesome-reveal";
 
 const MyWatchlist = () => {
     const { user } = useContext(AuthContext);
@@ -64,59 +65,69 @@ const MyWatchlist = () => {
                 </title>
             </Helmet>
             {reviews.length === 0 ? (
-                <p className="text-red-600 bg-red-100 border mx-auto border-red-300 px-4 py-2 w-full text-center container rounded-md">
-                    You haven't Watchlist Any Reviews
-                </p>
+                <div className=" w-full container">
+                    <Fade duration={600}>
+                        <p className="text-red-600 bg-red-100 border mx-auto border-red-300 px-4 py-2 w-full text-center rounded-md">
+                            You haven't Watchlist Any Reviews
+                        </p>
+                    </Fade>
+                </div>
             ) : (
                 <div className="overflow-x-auto container mx-auto">
-                    <table className="table">
-                        {/* head */}
-                        <thead>
-                            <tr>
-                                <th>SL</th>
-                                <th>Title</th>
-                                <th>Publishing Year</th>
-                                <th>Genres</th>
-                                <th>Rating / 5.00</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        {reviews.map((r, index) => (
-                            <tbody key={r._id}>
-                                {/* row 1 */}
-                                <tr className="hover">
-                                    <th>{index + 1}</th>
-                                    <td>{r.title}</td>
-                                    <td>{r.publishingYear}</td>
-                                    <td>{r.genres}</td>
-                                    <td>{r.rating}</td>
-                                    <td>
-                                        <div className="flex gap-4 w-fit">
-                                            <Link
-                                                to={`/${r._id}`}
-                                                className="btn btn-square btn-sm rounded-md bg-[#0a0] text-white hover:bg-[#0c0]"
-                                            >
-                                                <FaEye
-                                                    style={{ fontSize: "1rem" }}
-                                                />
-                                            </Link>
-
-                                            <button
-                                                onClick={() =>
-                                                    handleDelete(r._id)
-                                                }
-                                                className="btn btn-square btn-sm rounded-md bg-[#EA4744] text-gray-200 hover:bg-[#b33533]"
-                                            >
-                                                <MdDelete
-                                                    style={{ fontSize: "1rem" }}
-                                                />
-                                            </button>
-                                        </div>
-                                    </td>
+                    <Fade duration={600}>
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Title</th>
+                                    <th>Publishing Year</th>
+                                    <th>Genres</th>
+                                    <th>Rating / 5.00</th>
+                                    <th>Action</th>
                                 </tr>
-                            </tbody>
-                        ))}
-                    </table>
+                            </thead>
+                            {reviews.map((r, index) => (
+                                <tbody key={r._id}>
+                                    {/* row 1 */}
+                                    <tr className="hover">
+                                        <th>{index + 1}</th>
+                                        <td>{r.title}</td>
+                                        <td>{r.publishingYear}</td>
+                                        <td>{r.genres}</td>
+                                        <td>{r.rating}</td>
+                                        <td>
+                                            <div className="flex gap-4 w-fit">
+                                                <Link
+                                                    to={`/${r._id}`}
+                                                    className="btn btn-square btn-sm rounded-md bg-[#0a0] text-white hover:bg-[#0c0]"
+                                                >
+                                                    <FaEye
+                                                        style={{
+                                                            fontSize: "1rem",
+                                                        }}
+                                                    />
+                                                </Link>
+
+                                                <button
+                                                    onClick={() =>
+                                                        handleDelete(r._id)
+                                                    }
+                                                    className="btn btn-square btn-sm rounded-md bg-[#EA4744] text-gray-200 hover:bg-[#b33533]"
+                                                >
+                                                    <MdDelete
+                                                        style={{
+                                                            fontSize: "1rem",
+                                                        }}
+                                                    />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            ))}
+                        </table>
+                    </Fade>
                 </div>
             )}
         </div>
