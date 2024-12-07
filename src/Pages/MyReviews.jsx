@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaEye, FaPen } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { MdDelete } from "react-icons/md";
 
 const MyReviews = () => {
     const { user, setTotalReviews } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [selectedReview, setSelectedReview] = useState(null);
@@ -89,6 +90,7 @@ const MyReviews = () => {
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    setOpenModal(false);
                 } else {
                     Swal.fire({
                         title: "Failed!",
