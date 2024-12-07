@@ -1,6 +1,7 @@
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { Carousel } from "../Components/Carousel";
+import { Helmet } from "react-helmet-async";
 
 const AllReviews = () => {
     const reviews = useLoaderData();
@@ -11,6 +12,11 @@ const AllReviews = () => {
     };
     return (
         <div>
+            <Helmet>
+                <title>
+                    All Reviews | Chill Gamer : A Game Review Application
+                </title>
+            </Helmet>
             <div className="mx-auto container p-4">
                 <Carousel />
             </div>

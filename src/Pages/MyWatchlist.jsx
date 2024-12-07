@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const MyWatchlist = () => {
     const { user } = useContext(AuthContext);
@@ -57,6 +58,11 @@ const MyWatchlist = () => {
     // console.log(reviews);
     return (
         <div className="flex flex-wrap flex-col sm:flex-row items-center justify-center md:gap-10 sm:gap-6 gap-10 py-6 sm:px-6  container mx-auto">
+            <Helmet>
+                <title>
+                    My Watchlist | Chill Gamer : A Game Review Application
+                </title>
+            </Helmet>
             {reviews.length === 0 ? (
                 <p className="text-red-600 bg-red-100 border mx-auto border-red-300 px-4 py-2 w-full text-center container rounded-md">
                     You haven't Watchlist Any Reviews
