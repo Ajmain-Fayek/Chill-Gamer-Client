@@ -7,7 +7,6 @@ import { MdDelete } from "react-icons/md";
 
 const MyReviews = () => {
     const { user, setTotalReviews } = useContext(AuthContext);
-    const navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [selectedReview, setSelectedReview] = useState(null);
