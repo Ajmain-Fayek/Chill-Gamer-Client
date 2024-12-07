@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { MdDelete } from "react-icons/md";
 
 const MyReviews = () => {
-    const { user } = useContext(AuthContext);
+    const { user, setTotalReviews } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [selectedReview, setSelectedReview] = useState(null);
@@ -19,6 +19,9 @@ const MyReviews = () => {
             const data = await res.json();
             if (data.result) {
                 setReviews(data.result);
+                setTotalReviews(data.result.length);
+            } else {
+                setTotalReviews(0);
             }
         };
         fetchData();

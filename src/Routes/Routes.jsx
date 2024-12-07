@@ -10,6 +10,7 @@ import Register from "../Components/Register";
 import MyWatchlist from "../Pages/MyWatchlist";
 import Profile from "../Pages/Profile";
 import ReviewDetails from "../Pages/ReviewDetails";
+import UpdateProfile from "../Pages/UpdateProfile";
 
 const routes = createBrowserRouter([
     {
@@ -68,6 +69,14 @@ const routes = createBrowserRouter([
                 element: (
                     <PrivateRouter>
                         <Profile />
+                    </PrivateRouter>
+                ),
+            },
+            {
+                path: "//update-profile",
+                element: (
+                    <PrivateRouter>
+                        <UpdateProfile />
                     </PrivateRouter>
                 ),
             },

@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
     const [themeToggle, setThemeToggle] = useState(true);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [totalReviews, setTotalReviews] = useState(0);
 
     // Sign Up with **EMAIL & PASSWORD**
     const signUpWithEmailAndPassword = (email, password) => {
@@ -52,6 +53,20 @@ const AuthProvider = ({ children }) => {
     const deleteAccount = () => {
         return deleteUser(auth.currentUser);
     };
+
+    // Get reviews
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch(
+                `http://localhost:8800/reviews/search?query=${user.email}`
+            );
+            const data = await res.json();
+            if (data.result) {
+                setTotalReviews(data.result.length);
+            }
+        };
+        fetchData();
+    }, [user, totalReviews]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -97,6 +112,8 @@ const AuthProvider = ({ children }) => {
         signInUser,
         user,
         loading,
+        totalReviews,
+        setTotalReviews,
     };
     return (
         <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
