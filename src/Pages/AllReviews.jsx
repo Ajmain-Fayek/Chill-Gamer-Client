@@ -51,7 +51,7 @@ const AllReviews = () => {
                         </div>
                     ))) || (
                     <p className="text-red-600 bg-red-100 border mx-auto border-red-300 px-4 py-2 w-full text-center container rounded-md">
-                        No one Reviewed any Game yet!
+                        No one Reviewed any Games yet!
                     </p>
                 )}
             </div>
