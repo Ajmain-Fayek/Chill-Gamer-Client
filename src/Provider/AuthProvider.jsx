@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch(
-                `http://localhost:8800/reviews/search?query=${user.email}`
+                `https://chill-gamer-server.vercel.app/reviews/search?query=${user.email}`
             );
             const data = await res.json();
             if (data.result) {
@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
             // console.log(currentUser);
             if (currentUser?.email !== undefined) {
                 fetch(
-                    `http://localhost:8800/users/search?email=${currentUser?.email}`
+                    `https://chill-gamer-server.vercel.app/users/search?email=${currentUser?.email}`
                 )
                     .then((res) => {
                         if (!res.ok) {

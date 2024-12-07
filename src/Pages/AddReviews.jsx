@@ -33,7 +33,7 @@ const AddReviews = () => {
             email,
         };
 
-        fetch("http://localhost:8800/reviews", {
+        fetch("https://chill-gamer-server.vercel.app/reviews", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

@@ -12,7 +12,9 @@ const MyWatchlist = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch(`http://localhost:8800/users/${user._id}`);
+            const res = await fetch(
+                `https://chill-gamer-server.vercel.app/users/${user._id}`
+            );
             const data = await res.json();
             if (data.result) {
                 setReviews(data.result);
@@ -32,9 +34,12 @@ const MyWatchlist = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:8800/watchlist/${user._id}/${id}`, {
-                    method: "DELETE",
-                })
+                fetch(
+                    `https://chill-gamer-server.vercel.app/watchlist/${user._id}/${id}`,
+                    {
+                        method: "DELETE",
+                    }
+                )
                     .then((res) => res.json())
                     .then((data) => {
                         console.log(data);

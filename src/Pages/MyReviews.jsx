@@ -16,7 +16,7 @@ const MyReviews = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch(
-                `http://localhost:8800/reviews/search?query=${user.email}`
+                `https://chill-gamer-server.vercel.app/reviews/search?query=${user.email}`
             );
             const data = await res.json();
             if (data.result) {
@@ -41,7 +41,7 @@ const MyReviews = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:8800/reviews/${id}`, {
+                fetch(`https://chill-gamer-server.vercel.app/reviews/${id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())
@@ -74,13 +74,16 @@ const MyReviews = () => {
         const formData = new FormData(e.target); // FormData is a API whitch Collects all form data
         const data = Object.fromEntries(formData); // Convert to an object
         console.log(data);
-        fetch(`http://localhost:8800/reviews/${selectedReview._id}`, {
-            method: "PUT",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
+        fetch(
+            `https://chill-gamer-server.vercel.app/reviews/${selectedReview._id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(data),
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 if (data.message === "Review Updated Successfully") {

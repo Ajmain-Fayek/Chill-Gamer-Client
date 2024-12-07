@@ -22,12 +22,14 @@ const routes = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
-                loader: () => fetch("http://localhost:8800/reviews"),
+                loader: () =>
+                    fetch("https://chill-gamer-server.vercel.app/reviews"),
             },
             {
                 path: "/all-reviews",
                 element: <AllReviews />,
-                loader: () => fetch("http://localhost:8800/reviews"),
+                loader: () =>
+                    fetch("https://chill-gamer-server.vercel.app/reviews"),
             },
             {
                 path: "/login",
@@ -41,7 +43,9 @@ const routes = createBrowserRouter([
                 path: "/:id",
                 element: <ReviewDetails />,
                 loader: ({ params }) =>
-                    fetch(`http://localhost:8800/reviews/${params.id}`),
+                    fetch(
+                        `https://chill-gamer-server.vercel.app/reviews/${params.id}`
+                    ),
             },
             {
                 path: "/add-reviews",

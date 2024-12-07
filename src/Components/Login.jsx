@@ -58,7 +58,7 @@ const Login = () => {
             .then((res) => {
                 // console.log(res);
                 if (res.user) {
-                    fetch("http://localhost:8800/users", {
+                    fetch("https://chill-gamer-server.vercel.app/users", {
                         method: "POST",
                         headers: { "content-type": "application/json" },
                         body: JSON.stringify({
