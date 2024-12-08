@@ -1,6 +1,6 @@
-<p align="center"><img src="./src/assets/favicon.png" height="250px"></p>
+<p align="center"><img src="https://i.ibb.co.com/Gn3kvJw/favicon.png" height="250px"></p>
 
-# <img src="./src/assets/favicon.png" height="25px"> Chill Gamer: A Game Review Application
+# <img src="https://i.ibb.co.com/Gn3kvJw/favicon.png" height="25px"> Chill Gamer: A Game Review Application
 
 **Chill Gamer** is a dynamic platform designed for gaming enthusiasts to explore, review, and discuss their favorite video games. It enables users to share insights, rate games, and connect with a community of like-minded gamers. Whether you're looking for trusted reviews before purchasing a game or eager to share your own experiences, Chill Gamer is your go-to app for all things gaming.
 
