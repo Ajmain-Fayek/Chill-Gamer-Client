@@ -113,7 +113,7 @@ const MyReviews = () => {
             </Helmet>
             {reviews.length === 0 ? (
                 <div className=" w-full container">
-                    <Fade duration={600}>
+                    <Fade duration={1000}>
                         <p className="text-red-600 bg-red-100 border mx-auto border-red-300 px-4 py-2 w-full text-center rounded-md">
                             You haven't Reviewed Any Games
                         </p>
@@ -121,7 +121,7 @@ const MyReviews = () => {
                 </div>
             ) : (
                 <div className="overflow-x-auto container mx-auto z-[100]">
-                    <Fade duration={600}>
+                    <Fade duration={1000}>
                         <table className="table">
                             {/* head */}
                             <thead>
