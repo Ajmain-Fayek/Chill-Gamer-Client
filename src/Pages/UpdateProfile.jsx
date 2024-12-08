@@ -28,7 +28,9 @@ const UpdateProfile = () => {
     return (
         <div className="mb-36 md:mb-24">
             <Helmet>
-                <title>Update Profile | { user ? user.displayName : "Chill Gamer" }</title>
+                <title>
+                    Update Profile | {user ? user.displayName : "Chill Gamer"}
+                </title>
             </Helmet>
             <div className="max-w-md mx-auto mt-10 p-2">
                 <p className="text-sm 400 mb-6">

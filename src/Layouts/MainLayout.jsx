@@ -8,7 +8,7 @@ const MainLayout = () => {
     const { themeToggle } = useContext(AuthContext);
     return (
         <div data-theme={themeToggle ? "light" : "dark"}>
-            <Navbar/>
+            <Navbar />
             <Outlet />
             <Footer />
         </div>
