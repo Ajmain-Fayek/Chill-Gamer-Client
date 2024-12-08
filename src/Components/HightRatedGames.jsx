@@ -8,7 +8,7 @@ const HightRatedGames = () => {
     const hightRatedGames = result
         .filter((g) => parseFloat(g.rating) >= 4.5)
         .sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
-        .slice(0, 10);
+        .slice(0, 8);
     const navigate = useNavigate();
     const handleExplore = (id) => {
         return navigate(`/${id}`);
