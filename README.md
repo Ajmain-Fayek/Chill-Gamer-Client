@@ -48,16 +48,16 @@
    Users can write detailed reviews about video games, rate them on various aspects like gameplay, graphics, and story, and share their overall experience.
 
 2. **Game Ratings and Rankings**:  
-   Aggregate ratings from user reviews to rank games. Display trending or top-rated games in different categories like RPGs, FPS, or indie games.
+   Aggregate ratings from user reviews to rank games. Display trending or top-rated games in different categories like RPGs, Actions, Adventures game.
 
 3. **Advanced Search and Filters**:  
-   Provide tools to search for games by genre, release date, developer, platform, or rating. Filters can help users find exactly what they are looking for.
+   Provide tools to search for games by genre, release date, or rating. Filters can help users find exactly what they are looking for.
 
 4. **Game Database**:  
-   A comprehensive library of games with detailed descriptions, trailers, screenshots, and system requirements for informed decision-making.
+   A comprehensive library of games with detailed descriptions for informed decision-making.
 
-5. **User Wishlist**:  
-   Allow users to add games to their personal wishlist for future reference. Notify users of discounts or special offers for games in their wishlist.
+5. **User Watchlist**:  
+   Allow users to add games to their personal watchlist for future reference.
 
 ### Take a glance into the Project
 
