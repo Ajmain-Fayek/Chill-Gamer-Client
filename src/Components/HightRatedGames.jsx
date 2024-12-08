@@ -13,7 +13,7 @@ const HightRatedGames = () => {
     const handleExplore = (id) => {
         return navigate(`/${id}`);
     };
-    console.log(result);
+    // console.log(result);
     return (
         <div className="container mx-auto my-12 p-6">
             <h2 className="text-2xl font-bold lg:text-6xl sm:text-3xl md:text-4xl drop-shadow-[0_0_10px_#0f0]">

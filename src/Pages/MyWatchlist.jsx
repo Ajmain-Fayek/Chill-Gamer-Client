@@ -42,7 +42,7 @@ const MyWatchlist = () => {
                 )
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
+                        // console.log(data);
                         if (data.message === "Item removed successfully") {
                             setReviews(reviews.filter((r) => r._id !== id));
                             Swal.fire({

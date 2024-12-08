@@ -73,7 +73,7 @@ const MyReviews = () => {
         e.preventDefault();
         const formData = new FormData(e.target); // FormData is a API whitch Collects all form data
         const data = Object.fromEntries(formData); // Convert to an object
-        console.log(data);
+        // console.log(data);
         fetch(
             `https://chill-gamer-server.vercel.app/reviews/${selectedReview._id}`,
             {
