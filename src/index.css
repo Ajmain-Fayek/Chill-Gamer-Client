@@ -1,0 +1,9 @@
+.active {
+    text-decoration: underline;
+    color : #00ff00;
+    text-shadow: 0 0 10px black
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
