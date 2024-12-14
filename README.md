@@ -29,4 +29,4 @@
 
 -   Live Link: <https://chill-gamer-7f9f1.web.app>
 
-#### Backend: <https://github.com/programming-hero-web-course2/b10-a10-server-side-Ajmain-Fayek>
+#### Backend: <https://github.com/Ajmain-Fayek/Chill-Gamer-Server.git>
