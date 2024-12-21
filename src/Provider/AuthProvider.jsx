@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
     createUserWithEmailAndPassword,
     deleteUser,
@@ -10,12 +10,14 @@ import {
     updateProfile,
 } from "firebase/auth";
 import auth from "../Firebase/Firebase.config";
-export const AuthContext = createContext();
+import useAxiosSequre from "../Hooks/useAxiosSequre";
+import AuthContext from "./AuthContext";
 // GOOGLE AUTH PROVDER
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     // Theme Toggler
+    const axiosSequre = useAxiosSequre();
     const [themeToggle, setThemeToggle] = useState(true);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -46,6 +48,7 @@ const AuthProvider = ({ children }) => {
 
     // Sign Out User
     const logOutUser = () => {
+        setLoading(true);
         return signOut(auth);
     };
 
@@ -54,51 +57,49 @@ const AuthProvider = ({ children }) => {
         return deleteUser(auth.currentUser);
     };
 
-    // Get reviews
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch(
-                `https://chill-gamer-server.vercel.app/reviews/search?query=${user.email}`
-            );
-            const data = await res.json();
-            if (data.result) {
-                setTotalReviews(data.result.length);
-            }
-        };
-        fetchData();
-    }, [user, totalReviews]);
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            // console.log(currentUser);
-            if (currentUser?.email !== undefined) {
-                fetch(
-                    `https://chill-gamer-server.vercel.app/users/search?email=${currentUser?.email}`
-                )
+            // console.log("Current User: ", currentUser?.email);
+
+            if (currentUser?.email) {
+                axiosSequre
+                    .post(`/jwt`, { email: currentUser.email })
                     .then((res) => {
-                        if (!res.ok) {
-                            throw new Error(`Error: ${res.statusText}`);
-                        }
-                        return res.json();
-                    })
-                    .then((usr) => {
-                        setUser(usr);
-                        // console.log(usr);
+                        console.log("State Captured", res.data);
+
+                        // Get User Data from DataBase
+                        axiosSequre
+                            .get(`/users/search?email=${currentUser?.email}`)
+                            .then((res) => {
+                                console.log("Current User: ", res.data?.email);
+                                setUser(res.data);
+                                setLoading(false);
+                            })
+                            .catch((err) => {
+                                console.error(
+                                    "Failed to fetch user data:",
+                                    err
+                                );
+                                setUser(null);
+                                setLoading(false);
+                            });
                     })
                     .catch((err) => {
                         console.error("Failed to fetch user data:", err);
                         setUser(null);
-                    })
-                    .finally(() => {
                         setLoading(false);
                     });
+            } else {
+                axiosSequre.post(`/logout`, {}).then((res) => {
+                    console.log("log out:", res.data);
+                    setUser(null);
+                    setLoading(false);
+                });
             }
-            setLoading(false);
         });
 
         return () => unsubscribe();
-    }, [loading]);
+    }, []);
 
     const authInfo = {
         themeToggle,

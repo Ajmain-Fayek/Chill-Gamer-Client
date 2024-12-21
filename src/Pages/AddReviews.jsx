@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
-import { AuthContext } from "../Provider/AuthProvider";
 import { Fade } from "react-awesome-reveal";
+import useAuth from "../Hooks/useAuth";
 
 const AddReviews = () => {
-    const { user } = useContext(AuthContext);
+    const { user } = useAuth()
     const { email, userName } = user;
 
     const handleForm = (e) => {

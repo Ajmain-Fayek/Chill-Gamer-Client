@@ -1,14 +1,12 @@
 import { RiLoginBoxLine, RiLogoutBoxLine } from "react-icons/ri";
 import { Link, NavLink, useNavigate } from "react-router";
-import { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 // import { fadeIn, fadeOut } from "react-animations";
 import "animate.css";
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-    const { themeToggle, setThemeToggle, user, logOutUser } =
-        useContext(AuthContext);
+    const { themeToggle, setThemeToggle, user, logOutUser } = useAuth();
     const navigate = useNavigate();
     const handleLogOut = () => {
         logOutUser();

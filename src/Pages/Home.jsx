@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Carousel } from "../Components/Carousel";
 import HightRatedGames from "../Components/HightRatedGames";
 import { Fade } from "react-awesome-reveal";
 import NewsLater from "../Components/NewsLater";
 import ReviersRecomentations from "../Components/ReviersRecomentations";
-import { AuthContext } from "../Provider/AuthProvider";
+import useAuth from "../Hooks/useAuth";
 
 const Home = () => {
-    const { themeToggle } = useContext(AuthContext);
+    const { themeToggle } = useAuth();
     return (
         <>
             <Helmet>

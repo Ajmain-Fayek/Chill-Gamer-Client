@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router";
-import { AuthContext } from "../Provider/AuthProvider";
+import useAuth from "../Hooks/useAuth";
 
 const MainLayout = () => {
-    const { themeToggle } = useContext(AuthContext);
+    const { themeToggle } = useAuth();
     return (
         <div data-theme={themeToggle ? "light" : "dark"}>
             <Navbar />

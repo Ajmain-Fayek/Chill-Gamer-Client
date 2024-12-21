@@ -1,15 +1,14 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
 import { Helmet } from "react-helmet-async";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Fade } from "react-awesome-reveal";
+import useAuth from "../Hooks/useAuth";
 
 const Login = () => {
-    const { signInWithGoogle, signInUser, setEmail, setUser } =
-        useContext(AuthContext);
+    const { signInWithGoogle, signInUser, setEmail } = useAuth();
     const [errorMsg, setErrorMsg] = useState("");
     const [errorMsgGoogle, setErrorMsgGoogle] = useState("");
     const [showPassword, setShowPassword] = useState(false);

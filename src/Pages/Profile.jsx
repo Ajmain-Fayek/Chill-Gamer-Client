@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
     FaFacebookSquare,
     FaGithubSquare,
@@ -7,14 +7,14 @@ import {
 } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../Provider/AuthProvider";
 import { Fade } from "react-awesome-reveal";
 import Swal from "sweetalert2";
+import useAuth from "../Hooks/useAuth";
 
 const Profile = () => {
     const [openModal, setOpenModal] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
-    const { deleteAccount, user, totalReviews } = useContext(AuthContext);
+    const { deleteAccount, user, totalReviews } = useAuth();
     const navigate = useNavigate();
 
     // Validate user data

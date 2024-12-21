@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { Helmet } from "react-helmet-async";
-import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAuth from "../Hooks/useAuth";
 
 const UpdateProfile = () => {
-    const { updateUserInfo, user } = useContext(AuthContext);
+    const { updateUserInfo, user } = useAuth();
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -72,7 +72,7 @@ const UpdateProfile = () => {
         <div className="mb-36 md:mb-24">
             <Helmet>
                 <title>
-                    Update Profile | {user ? user.displayName : "Chill Gamer"}
+                    Update Profile | {user ? user?.displayName : "Chill Gamer"}
                 </title>
             </Helmet>
             <div className="max-w-md mx-auto mt-10 p-2">

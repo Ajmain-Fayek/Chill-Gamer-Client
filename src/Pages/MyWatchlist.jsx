@@ -1,23 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router";
 import { Helmet } from "react-helmet-async";
 import { Fade } from "react-awesome-reveal";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSequre";
 
 const MyWatchlist = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOutUser } = useAuth();
     const [reviews, setReviews] = useState([]);
+    const axiosSequre = useAxiosSecure();
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch(
-                `${import.meta.env.VITE_api_url}/users/${user._id}`
-            );
-            const data = await res.json();
-            if (data.result) {
-                setReviews(data.result);
+            const res = await axiosSequre.get(`/users/${user._id}`);
+            if (res.data.result) {
+                setReviews(res.data.result);
             }
         };
         fetchData();
@@ -42,7 +41,23 @@ const MyWatchlist = () => {
                         method: "DELETE",
                     }
                 )
-                    .then((res) => res.json())
+                    .then((res) => {
+                        if (res.status === 401 || res.status === 403) {
+                            return Swal.fire({
+                                title: "Unauthorize Access!",
+                                icon: "warning",
+                                showConfirmButton: true,
+                                confirmButtonText: "LogOut",
+                                confirmButtonColor: "#ff0000",
+                            }).then(() =>
+                                logOutUser().then(() => {
+                                    navigate("/login");
+                                    console.log("User Logged out seccesfully");
+                                })
+                            );
+                        }
+                        res.json();
+                    })
                     .then((data) => {
                         // console.log(data);
                         if (data.message === "Item removed successfully") {

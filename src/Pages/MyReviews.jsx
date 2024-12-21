@@ -1,36 +1,37 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { FaEye, FaPen } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { MdDelete } from "react-icons/md";
 import { Helmet } from "react-helmet-async";
 import { Fade } from "react-awesome-reveal";
+import useAxiosSequre from "../Hooks/useAxiosSequre";
+import useAuth from "../Hooks/useAuth";
 
 const MyReviews = () => {
-    const { user, setTotalReviews } = useContext(AuthContext);
+    const { user, setTotalReviews } = useAuth();
     const [reviews, setReviews] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [selectedReview, setSelectedReview] = useState(null);
+    const axiosSecure = useAxiosSequre();
 
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch(
-                `${import.meta.env.VITE_api_url}/reviews/search?query=${
-                    user.email
-                }`
-            );
-            const data = await res.json();
-            if (data.result) {
-                setReviews(data.result);
-                setTotalReviews(data.result.length);
-            } else {
-                setTotalReviews(0);
-            }
-        };
-        fetchData();
-    }, [reviews]);
-    // console.log(reviews);
+        if (!user?.email) return;
+        axiosSecure
+            .get(`/reviews/search?query=${user.email}`)
+            .then((res) => {
+                // console.log(res.data);
+                if (res.data?.result) {
+                    setReviews(res.data?.result);
+                    setTotalReviews(res.data?.result.length);
+                } else {
+                    setTotalReviews(0);
+                }
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+            });
+    }, [user?.email]);
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -43,27 +44,23 @@ const MyReviews = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`${import.meta.env.VITE_api_url}/reviews/${id}`, {
-                    method: "DELETE",
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        // console.log(data);
-                        if (data.message === "Review Deleted Successfully") {
-                            setReviews(reviews.filter((r) => r._id !== id));
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: data.message,
-                                icon: "success",
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Failed!",
-                                text: data.message,
-                                icon: "error",
-                            });
-                        }
-                    });
+                axiosSecure.delete(`/reviews/${id}`).then(({ data }) => {
+                    // console.log(data);
+                    if (data.message === "Review Deleted Successfully") {
+                        setReviews(reviews.filter((r) => r._id !== id));
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: data.message,
+                            icon: "success",
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Failed!",
+                            text: data.message,
+                            icon: "error",
+                        });
+                    }
+                });
             }
         });
     };
@@ -76,15 +73,9 @@ const MyReviews = () => {
         const formData = new FormData(e.target); // FormData is a API whitch Collects all form data
         const data = Object.fromEntries(formData); // Convert to an object
         // console.log(data);
-        fetch(`${import.meta.env.VITE_api_url}/reviews/${selectedReview._id}`, {
-            method: "PUT",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then((res) => res.json())
-            .then((data) => {
+        axiosSecure
+            .put(`/reviews/${selectedReview._id}`, data)
+            .then(({ data }) => {
                 if (data.message === "Review Updated Successfully") {
                     Swal.fire({
                         title: "Success",

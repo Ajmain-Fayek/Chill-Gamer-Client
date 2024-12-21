@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, data } from "react-router";
 import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home";
 import PrivateRouter from "../Provider/PrivateRouter";
@@ -12,6 +12,7 @@ import Profile from "../Pages/Profile";
 import ReviewDetails from "../Pages/ReviewDetails";
 import UpdateProfile from "../Pages/UpdateProfile";
 import Page404 from "../Components/Page404";
+import axios from "axios";
 
 const routes = createBrowserRouter([
     {
@@ -40,10 +41,19 @@ const routes = createBrowserRouter([
             {
                 path: "/:id",
                 element: <ReviewDetails />,
-                loader: ({ params }) =>
-                    fetch(
-                        `${import.meta.env.VITE_api_url}/reviews/${params.id}`
-                    ),
+                loader: async ({ params }) => {
+                    try {
+                        const response = await axios.get(
+                            `${import.meta.env.VITE_api_url}/reviews/${
+                                params.id
+                            }`
+                        );
+                        return response.data.result; // Return the result for the loader
+                    } catch (error) {
+                        console.error("Error fetching review details:", error);
+                        throw new Error("Failed to load review details");
+                    }
+                },
             },
             {
                 path: "/add-reviews",
@@ -78,7 +88,7 @@ const routes = createBrowserRouter([
                 ),
             },
             {
-                path: "//update-profile",
+                path: "/update-profile",
                 element: (
                     <PrivateRouter>
                         <UpdateProfile />

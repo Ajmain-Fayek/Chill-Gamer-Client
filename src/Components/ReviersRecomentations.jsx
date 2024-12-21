@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import useAuth from "../Hooks/useAuth";
 
 const ReviersRecomentations = ({
     prop = "Best Game Review Application ever!!!",
 }) => {
-    const { themeToggle } = useContext(AuthContext);
+    const { themeToggle } = useAuth();
     return (
         <div>
             <div

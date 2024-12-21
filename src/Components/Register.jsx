@@ -1,13 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
-import { AuthContext } from "../Provider/AuthProvider";
 import { Fade } from "react-awesome-reveal";
+import useAuth from "../Hooks/useAuth";
 
 const Register = () => {
-    const { signUpWithEmailAndPassword, updateUserInfo } =
-        useContext(AuthContext);
+    const { signUpWithEmailAndPassword, updateUserInfo } = useAuth();
     const [errorMsg, setErrorMsg] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();

@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link, useLoaderData, useNavigate } from "react-router";
-import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSequre";
 
 const ReviewDetails = () => {
-    const { user } = useContext(AuthContext);
-    const { result } = useLoaderData();
+    const { user, logOutUser } = useAuth();
     const navigate = useNavigate();
+    const result = useLoaderData();
+    const axiosSequre = useAxiosSecure();
     const {
         backgroundImg,
         details,
@@ -20,28 +21,27 @@ const ReviewDetails = () => {
         userName,
         _id,
     } = result;
+    // console.log(result);
     const handleWatchlist = (id) => {
         if (!user) {
             return navigate("/login");
         }
-        fetch(`${import.meta.env.VITE_api_url}/users/${user._id}`, {
-            method: "PATCH",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify({ watchList: id }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.message) {
+        axiosSequre
+            .patch(`${import.meta.env.VITE_api_url}/users/${user._id}`, {
+                watchList: id,
+            })
+            .then((res) => {
+                console.log(res.status);
+
+                if (res.data?.message) {
                     Swal.fire({
                         title: "warning",
-                        text: data.message,
+                        text: res.data.message,
                         icon: "warning",
                         showConfirmButton: true,
                     });
                 }
-                if (data.result) {
+                if (res.data?.result) {
                     Swal.fire({
                         title: "Success",
                         text: "Game Added successfully",
@@ -49,6 +49,23 @@ const ReviewDetails = () => {
                         showConfirmButton: false,
                         timer: 2000,
                     });
+                }
+            })
+            .catch((error) => {
+                const status = error.response.status;
+                if (status === 401 || status === 403) {
+                    return Swal.fire({
+                        title: "Unauthorize Access!",
+                        icon: "warning",
+                        showConfirmButton: true,
+                        confirmButtonText: "LogOut",
+                        confirmButtonColor: "#ff0000",
+                    }).then(() =>
+                        logOutUser().then(() => {
+                            navigate("/login");
+                            console.log("User Logged out seccesfully");
+                        })
+                    );
                 }
             });
     };
