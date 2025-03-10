@@ -57,8 +57,11 @@ const AuthProvider = ({ children }) => {
     // Get reviews
     useEffect(() => {
         const fetchData = async () => {
+            if (!user?.email) return;
             const res = await fetch(
-                `https://chill-gamer-server.vercel.app/reviews/search?query=${user.email}`
+                `${import.meta.env.VITE_API}/reviews/search?query=${
+                    user?.email
+                }`
             );
             const data = await res.json();
             if (data.result) {
@@ -72,9 +75,11 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             // console.log(currentUser);
-            if (currentUser?.email !== undefined) {
+            if (currentUser?.email) {
                 fetch(
-                    `https://chill-gamer-server.vercel.app/users/search?email=${currentUser?.email}`
+                    `${import.meta.env.VITE_API}/users/search?email=${
+                        currentUser?.email
+                    }`
                 )
                     .then((res) => {
                         if (!res.ok) {

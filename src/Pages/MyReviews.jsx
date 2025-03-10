@@ -16,7 +16,7 @@ const MyReviews = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch(
-                `https://chill-gamer-server.vercel.app/reviews/search?query=${user.email}`
+                `${import.meta.env.VITE_API}/reviews/search?query=${user.email}`
             );
             const data = await res.json();
             if (data.result) {
@@ -41,7 +41,7 @@ const MyReviews = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://chill-gamer-server.vercel.app/reviews/${id}`, {
+                fetch(`${import.meta.env.VITE_API}/reviews/${id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())
@@ -75,7 +75,7 @@ const MyReviews = () => {
         const data = Object.fromEntries(formData); // Convert to an object
         // console.log(data);
         fetch(
-            `https://chill-gamer-server.vercel.app/reviews/${selectedReview._id}`,
+            `${import.meta.env.VITE_API}/reviews/${selectedReview._id}`,
             {
                 method: "PUT",
                 headers: {

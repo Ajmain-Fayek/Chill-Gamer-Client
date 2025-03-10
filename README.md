@@ -4,9 +4,6 @@
 
 **Chill Gamer** is a dynamic platform designed for gaming enthusiasts to explore, review, and discuss their favorite video games. It enables users to share insights, rate games, and connect with a community of like-minded gamers. Whether you're looking for trusted reviews before purchasing a game or eager to share your own experiences, Chill Gamer is your go-to app for all things gaming.
 
-### Requirement Document
-
--   <a href="https://drive.google.com/file/d/1-0VpNQmX2EAECcn0gPyezexsFjc8rcVs/view?usp=sharing">Chill Gamer: A Game Review Application</a>
 
 ### Key Features
 
@@ -29,4 +26,4 @@
 
 -   Live Link: <https://chill-gamer-7f9f1.web.app>
 
-#### Backend: <https://github.com/programming-hero-web-course2/b10-a10-server-side-Ajmain-Fayek>
+#### Backend: <https://github.com/Ajmain-Fayek/Chill-Gamer-Server.git>

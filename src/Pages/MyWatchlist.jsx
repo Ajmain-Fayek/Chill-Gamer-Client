@@ -13,7 +13,7 @@ const MyWatchlist = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch(
-                `https://chill-gamer-server.vercel.app/users/${user._id}`
+                `${import.meta.env.VITE_API}/users/${user._id}`
             );
             const data = await res.json();
             if (data.result) {
@@ -35,7 +35,7 @@ const MyWatchlist = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(
-                    `https://chill-gamer-server.vercel.app/watchlist/${user._id}/${id}`,
+                    `${import.meta.env.VITE_API}/watchlist/${user._id}/${id}`,
                     {
                         method: "DELETE",
                     }

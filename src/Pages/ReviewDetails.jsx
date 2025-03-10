@@ -24,7 +24,7 @@ const ReviewDetails = () => {
         if (!user) {
             return navigate("/login");
         }
-        fetch(`https://chill-gamer-server.vercel.app/users/${user._id}`, {
+        fetch(`${import.meta.env.VITE_API}/users/${user._id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json",

@@ -37,7 +37,7 @@ const UpdateProfile = () => {
 
             // Update user info in the database
             const response = await fetch(
-                `https://chill-gamer-server.vercel.app/users/${user._id}`,
+                `${import.meta.env.VITE_API}/users/${user._id}`,
                 {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },

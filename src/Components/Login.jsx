@@ -58,7 +58,7 @@ const Login = () => {
             .then((res) => {
                 // console.log(res);
                 if (res.user) {
-                    fetch("https://chill-gamer-server.vercel.app/users", {
+                    fetch(`${import.meta.env.VITE_API}/users`, {
                         method: "POST",
                         headers: { "content-type": "application/json" },
                         body: JSON.stringify({

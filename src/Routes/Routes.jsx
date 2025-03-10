@@ -23,13 +23,13 @@ const routes = createBrowserRouter([
                 path: "/",
                 element: <Home />,
                 loader: () =>
-                    fetch("https://chill-gamer-server.vercel.app/reviews"),
+                    fetch(`${import.meta.env.VITE_API}/reviews`),
             },
             {
                 path: "/all-reviews",
                 element: <AllReviews />,
                 loader: () =>
-                    fetch("https://chill-gamer-server.vercel.app/reviews"),
+                    fetch(`${import.meta.env.VITE_API}/reviews`),
             },
             {
                 path: "/login",
@@ -44,7 +44,7 @@ const routes = createBrowserRouter([
                 element: <ReviewDetails />,
                 loader: ({ params }) =>
                     fetch(
-                        `https://chill-gamer-server.vercel.app/reviews/${params.id}`
+                        `${import.meta.env.VITE_API}/reviews/${params.id}`
                     ),
             },
             {

@@ -33,7 +33,7 @@ const AddReviews = () => {
             email,
         };
 
-        fetch("https://chill-gamer-server.vercel.app/reviews", {
+        fetch(`${import.meta.env.VITE_API}/reviews`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",

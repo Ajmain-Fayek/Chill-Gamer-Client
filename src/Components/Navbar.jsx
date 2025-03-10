@@ -62,11 +62,19 @@ const Navbar = () => {
 
                         <NavLink to={"/all-reviews"}>All Reviews</NavLink>
 
-                        <NavLink to={"/add-reviews"}>Add Review</NavLink>
+                        {user && (
+                            <>
+                                <NavLink to={"/add-reviews"}>
+                                    Add Review
+                                </NavLink>
 
-                        <NavLink to={"/my-reviews"}>My Reviews</NavLink>
+                                <NavLink to={"/my-reviews"}>My Reviews</NavLink>
 
-                        <NavLink to={"/my-watchlist"}>My Watchlist</NavLink>
+                                <NavLink to={"/my-watchlist"}>
+                                    My Watchlist
+                                </NavLink>
+                            </>
+                        )}
                     </nav>
                 </div>
             </div>
@@ -158,28 +166,39 @@ const Navbar = () => {
                         tabIndex={0}
                         className="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow dark:border"
                     >
-                        <li>
-                            <NavLink
-                                to={"/profile"}
-                                className="justify-between"
-                            >
-                                Profile
-                            </NavLink>
-                        </li>
+                        {user && (
+                            <>
+                                <li>
+                                    <NavLink
+                                        to={"/profile"}
+                                        className="justify-between"
+                                    >
+                                        Profile
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/my-reviews"}>
+                                        My Reviews
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/my-watchlist"}>
+                                        My Watchlist
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/add-reviews"}>
+                                        Add Reviews
+                                    </NavLink>
+                                </li>
+                            </>
+                        )}
                         <li>
                             <NavLink to={"/"}>Home</NavLink>
                         </li>
-                        <li>
-                            <NavLink to={"/my-watchlist"}>My Watchlist</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/my-reviews"}>My Reviews</NavLink>
-                        </li>
+
                         <li>
                             <NavLink to={"/all-reviews"}>All Reviews</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/add-reviews"}>Add Reviews</NavLink>
                         </li>
                         <li>
                             {user ? (

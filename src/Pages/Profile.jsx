@@ -39,7 +39,7 @@ const Profile = () => {
         try {
             await deleteAccount();
             const response = await fetch(
-                `https://chill-gamer-server.vercel.app/users/${user._id}`,
+                `${import.meta.env.VITE_API}/users/${user._id}`,
                 { method: "DELETE" }
             );
             if (!response.ok)
